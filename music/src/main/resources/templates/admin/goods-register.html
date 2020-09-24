@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>GalaxyMusic管理ページ</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script><!--최신 폰트어썸-->
+    <script src='./js/gnb.js'></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="./css/admin.css">
+    <style>
+        #goods_register {
+            float: right;
+            width: 1130px;
+            min-height: 600px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #goods_register > nav {
+            border-bottom: 1px solid #c0c0c0;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        #goods_register > nav > h3 {
+            float: left;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        #goods_register > nav > p {
+            float: right;
+            margin-top: 10px;
+        }
+        #goods_register > div > div > form {
+            width: 800px;
+        }
+        #goods_register > div > div > form > table {
+            width: 100%;
+        }
+        #goods_register > div > div > form > table tr > th {
+            width: 105px;
+            padding: 10px 20px 10px 20px;
+            font-size: 16px;
+            background: #e7e4e4;
+        }
+        #goods_register > div > div > form > table tr > td {
+            padding: 10px;
+            font-size: 16px;
+        }
+        #goods_register > div > div > form > table tr > td > input {
+            width: 200px;
+            height: 20px;
+        }
+        #goods_register > div > div > form > table tr > td > input[type=submit] {
+            width: 120px;
+            height: 50px;
+            font-size: 18px;
+        }
+        #goods_register > div > div > form > table tr > td > input[type=checkbox] {
+            width: 50px;
+        }
+        .select_sub > td > select {
+            float: left;
+            display: none;
+        }
+        .select_sub > td > select.on {
+            display: block;
+        }
+        .preview {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .preview_image {
+            width: 150px;
+            height: 150px;
+            border: 1px solid blue;
+            box-sizing: border-box;
+        }
+        #goods_register {}
+        #goods_register {}
+        #goods_register {}
+        #goods_register {}
+        
+    </style>
+    <script>
+        $(document).ready(function(){
+           $('#kind').change(function(){
+                if($(this).val() == 1) {
+                    $('.stringed').addClass('on');
+                    $('.tools').removeClass('on');
+                    $('.case').removeClass('on');
+                    $('.goods').removeClass('on');
+                } else if($(this).val() == 2) {
+                    $('.stringed').removeClass('on');
+                    $('.tools').addClass('on');
+                    $('.case').removeClass('on');
+                    $('.goods').removeClass('on');
+                } else if($(this).val() == 3) {
+                    $('.stringed').removeClass('on');
+                    $('.tools').removeClass('on');
+                    $('.case').addClass('on');
+                    $('.goods').removeClass('on');
+                } else if($(this).val() == 4) {
+                    $('.stringed').removeClass('on');
+                    $('.tools').removeClass('on');
+                    $('.case').removeClass('on');
+                    $('.goods').addClass('on');
+                }
+           })
+        });
+    </script>
+</head>
+<body>
+    <div id="admin-wrapper">
+        <header>
+            <div>
+                <img src="./img/admin_logo.png" alt="">
+                <p>
+                    <span>${member.name}&nbsp様 　おはようございます。</span>
+                    <a href="/music/admin/index.do">ホーム |</a>
+                    <a href="/music/user/logout.do">ログアウト |</a>
+                    <a href="#">お問い合わせ</a>
+                </p>
+            </div>
+        </header>
+        <main>
+            <aside>
+                <!-- Global Navigation Bar -->
+                <ul id="gnb">
+                    <li>
+                        <a href="#"><i class="fas fa-cogs"></i>環境設定</a>
+                        <ol>
+                            <li><a href="#">基本環境設定</a></li>
+                            <li><a href="#">バナー管理</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-users"></i>会員管理</a>
+                        <ol>
+                            <li><a href="#">会員現況</a></li>
+                            <li><a href="#">ポイント管理</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-box-open"></i>商品管理</a>
+                        <ol>
+                            <li><a href="#">商品現況</a></li>
+                            <li><a href="#">商品登録</a></li>
+                            <li><a href="#">在庫管理</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#"><i class="far fa-credit-card"></i>注文管理</a>
+                        <ol>
+                            <li><a href="#">注文現況</a></li>
+                            <li><a href="#">売上現況</a></li>
+                            <li><a href="#">決済管理</a></li>
+                            <li><a href="#">配送管理</a></li>
+                        </ol>
+                    </li>
+                </ul>
+            </aside>
+            <section id="goods_register">
+                <nav>
+                    <h3>商品登録</h3>
+                    <p>
+                        HOME > 商品管理 ><strong>商品登録</strong>
+                    </p>
+                </nav>
+                <div>
+                    <div>
+                        <form action="#">
+                            <table>
+                                <tr>
+                                    <th>商品名前</th>
+                                    <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th>商品コード</th>
+                                    <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th>商品種類</th>
+                                    <td>
+                                        <select id="kind">
+                                            <option value="1">弦楽器</option>
+                                            <option value="2">小道具</option>
+                                            <option value="3">ケース</option>
+                                            <option value="4">共通用品</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="select_sub">
+                                    <th>商品分類</th>
+                                    <td>
+                                        <select class="stringed on">
+                                            <option>バイオリン</option>
+                                            <option>チェロ</option>
+                                            <option>ビオラ</option>
+                                            <option>ウクレレ</option>
+                                            <option>エレキギター</option>
+                                            <option>ギター</option>
+                                        </select>
+                                        <select class="tools">
+                                            <option>弓</option>
+                                            <option>松脂</option>
+                                            <option>肩当て</option>
+                                            <option>弦</option>
+                                            <option>その他</option>
+                                        </select>
+                                        <select class="case">
+                                            <option>バイオリン</option>
+                                            <option>チェロ</option>
+                                            <option>ビオラ</option>
+                                            <option>ウクレレ</option>
+                                            <option>エレキギター</option>
+                                            <option>ギター</option>
+                                        </select>
+                                        <select class="goods">
+                                            <option>譜面台</option>
+                                            <option>メトロノーム</option>
+                                            <option>チューナー</option>
+                                            <option>文具</option>
+                                            <option>その他</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>定価</th>
+                                    <td>
+                                        <input type="text">
+                                        円
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>販売価格</th>
+                                    <td>
+                                        <input type="text">
+                                        円
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>配送料</th>
+                                    <td>
+                                        <input type="text">
+                                        円
+                                        <input type="checkbox">
+                                        (無料配送のはチェックしてください。)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>ブランド</th>
+                                    <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th>原産地</th>
+                                    <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th>商品イメージ</th>
+                                    <td>
+                                        <input type="file">
+                                        <div>
+                                            <span class="preview">preview</span>
+                                            <div class="preview_image"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>補助イメージ</th>
+                                    <td>
+                                        <input type="file">
+                                        <input type="file">
+                                        <input type="file">
+                                        <input type="file">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="right">
+                                        <input type="submit" value="商品登録">
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+        <footer>
+            <div>
+                <p>Copyright ©GalxayMusic.co.kr All rights reserved. GalxayMusic ADMINISTRATOR Version 5.4.1.2</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
